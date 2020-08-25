@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.MemberMapper">
+<select id="getMemberById" resultType="com.example.demo.dto.Member">
+		SELECT *
+		FROM member
+		WHERE id=#{id}
+	</select>
+	<select id="getTotalMember" resultType="map">
+		SELECT *
+		FROM member
+	</select>
+	<select id="getMemberListByPageNum" resultType="map">
+		select *
+		from attachment
+		as a left join board 
+		as b on a.a_bnumber = b.b_number
+		LIMIT #{a_start}, #{a_limit}
+	</select>
+	<insert id="insertMember" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO member (name, email, gender, birth, phoneNumber, passwd) VALUES
+		(#{name}, #{email}, #{gender}, #{birth}, #{phoneNumber}, #{passwd})
+	</insert>
+	<update id="updateMember">
+		UPDATE phone set id=#{id}, name=#{name}, email=#{email}, gender=#{gender}, birth=#{birth}, phoneNumber=#{phoneNumber}, passwd =#{passwd}
+		WHERE id=#{id}
+	</update>
+	<delete id="deleteMemberById">
+		DELETE FROM member
+		WHERE id=#{id}
+	</delete>
+	
+</mapper>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.ProgramMapper">
+<select id="getProgramById" resultType="com.example.demo.dto.Program">
+		SELECT *
+		FROM program
+		WHERE id=#{id}
+	</select>
+	<select id="getTotalProgram" resultType="map">
+		SELECT *
+		FROM program
+	</select>
+	<select id="getProgramListByPageNum" resultType="map">
+		select *
+		from attachment
+		as a left join board 
+		as b on a.a_bnumber = b.b_number
+		LIMIT #{a_start}, #{a_limit}
+	</select>
+	<insert id="insertProgram" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO program (program, title, xPos, yPos, sumOfGrade, countOfUse, account, countOfRecommendation, countOfSave, workHandPerOneDay, countOfpostscript, address, phoneNumber, maxNumberOfPeople, homePage) VALUES
+		(#{program}, #{title}, #{xPos}, #{yPos}, #{sumOfGrade}, #{countOfUse}, #{account}, #{countOfRecommendation}, #{countOfSave}, #{workHandPerOneDay}, #{countOfpostscript}, #{address}, #{phoneNumber}, #{maxNumberOfPeople}, #{homePage})
+	</insert>
+	<update id="updateProgram">
+		UPDATE phone set id=#{id}, program=#{program}, title=#{title}, xPos=#{xPos}, yPos=#{yPos}, sumOfGrade=#{sumOfGrade}, countOfUser=#{countOfUse}, account =#{account}, countOfRecommendation =#{countOfRecommendation}, countOfSave =#{countOfSave}, workHandPerOneDay =#{workHandPerOneDay}, countOfpostscript =#{countOfpostscript}, address =#{address}, phoneNumber =#{phoneNumber}, maxNumberOfPeople =#{maxNumberOfPeople}, homePage =#{homePage}
+		WHERE id=#{id}
+	</update>
+	<delete id="deleteProgramById">
+		DELETE FROM program
+		WHERE id=#{id}
+	</delete>
+	
+</mapper>

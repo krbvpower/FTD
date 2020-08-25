@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.ReservationMapper">
+<select id="getReservationById" resultType="com.example.demo.dto.Reservation">
+		SELECT *
+		FROM reservation
+		WHERE id=#{id}
+	</select>
+	<select id="getTotalReservation" resultType="map">
+		SELECT *
+		FROM reservation
+	</select>
+	<select id="getReservationListByPageNum" resultType="map">
+		select *
+		from attachment
+		as a left join board 
+		as b on a.a_bnumber = b.b_number
+		LIMIT #{a_start}, #{a_limit}
+	</select>
+	<insert id="insertReservation" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO reservation (email, program, numberOfPeople, options, price, workHandPerOneDay, date) VALUES
+		(#{email}, #{program}, #{numberOfPeople}, #{options}, #{price}, #{workHandPerOneDay}, #{date})
+	</insert>
+	<update id="updateReservation">
+		UPDATE phone set id=#{id}, email=#{email}, program=#{program}, numberOfPeople=#{numberOfPeople}, options=#{options}, price=#{price}, workHandPerOneDay=#{workHandPerOneDay}, date=#{date}
+		WHERE id=#{id}
+	</update>
+	<delete id="deleteReservationById">
+		DELETE FROM reservation
+		WHERE id=#{id}
+	</delete>
+	
+</mapper>
