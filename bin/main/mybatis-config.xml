@@ -10,6 +10,5 @@
     	<mapper resource="mapper/ReviewMapper.xml"/>
     	<mapper resource="mapper/DiaryMapper.xml"/>
     	<mapper resource="mapper/ReservationMapper.xml"/>
-    	
     </mappers>
 </configuration>
